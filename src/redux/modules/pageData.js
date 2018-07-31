@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   count: 0
 };
 
-export default (state = INITIAL_STATE, action) => {
+const pageDataReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case COUNT_UP: {
       const { count } = state;
@@ -20,4 +20,6 @@ export default (state = INITIAL_STATE, action) => {
       return state;
     }
   }
-}
+};
+
+export default pageDataReducer;
