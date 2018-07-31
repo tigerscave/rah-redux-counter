@@ -1,34 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { countPlus } from '../redux/action/counter-action';
+import { countPlus, countMinus, countClear } from '../redux/action/counter-action';
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props); 
-  // }
-    // this.state = {
-    //   counter: 0
-    // }
-
-  //   this.onCountPlus = () => {
-  //     let { counter } = this.state; 
-  //     this.setState({
-  //       counter: ++counter
-  //     }); 
-  //   }; 
-
-  //   this.onCountMinus = () => {
-  //     let { counter } = this.state; 
-  //     this.setState({
-  //       counter: --counter
-  //     });
-  //   }; 
-  //   this.onCountClear = () => {
-  //     this.setState({
-  //       counter: 0,
-  //     });
-  //   }; 
-  // }
   render() {
     const { count } = this.props; 
     return (
@@ -36,7 +10,8 @@ class App extends Component {
         <h1>{count}</h1> 
         <div>
           <button onClick={this.props.countPlus}>+</button> 
-        
+          <button onClick={this.props.countMinus}>-</button>
+          <button onClick={this.props.countClear}>C</button> 
         </div>
         <style jsx="true">{`
           .App {
@@ -67,8 +42,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatch: () => dispatch(countPlus())
+    countPlus: () => dispatch(countPlus()),
+    countMinus: () => dispatch(countMinus()),
+    countClear: () => dispatch(countClear())
   }
 }
 
-export default connect(mapStateToProps, {countPlus})(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
