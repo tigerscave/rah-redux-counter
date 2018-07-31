@@ -9,11 +9,18 @@ export const countDown = createAction(COUNT_DOWN);
 export const COUNT_CLEAR = 'COUNT_CLEAR';
 export const countClear = createAction(COUNT_CLEAR);
 
+export const INPUT_NUMBER = 'INPUT_NUMBER';
+export const inputNumber = createAction(INPUT_NUMBER);
+
 const INITIAL_STATE = {
   count: 0
 };
 
+console.log(countUp());
+
 const pageDataReducer = (state = INITIAL_STATE, action) => {
+  console.log(action);
+  
   switch(action.type) {
     case COUNT_UP: {
       const { count } = state;
@@ -32,6 +39,12 @@ const pageDataReducer = (state = INITIAL_STATE, action) => {
     case COUNT_CLEAR: {
       return {
         count: 0
+      }
+    }
+
+    case INPUT_NUMBER: {
+      return {
+        count: action.payload
       }
     }
 
