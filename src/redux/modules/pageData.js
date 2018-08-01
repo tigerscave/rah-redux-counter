@@ -12,6 +12,9 @@ export const countClear = createAction(COUNT_CLEAR);
 export const INPUT_NUMBER = 'INPUT_NUMBER';
 export const inputNumber = createAction(INPUT_NUMBER);
 
+export const NUMBER_BUTTONS = 'NUMBER_BUTTONS';
+export const numberButton = createAction(NUMBER_BUTTONS);
+
 const INITIAL_STATE = {
   count: 0
 };
@@ -43,6 +46,14 @@ const pageDataReducer = (state = INITIAL_STATE, action) => {
     }
 
     case INPUT_NUMBER: {
+      console.log(typeof(action.payload));
+      
+      return {
+        count: action.payload
+      }
+    }
+
+    case NUMBER_BUTTONS: {
       return {
         count: action.payload
       }
