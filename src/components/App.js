@@ -1,63 +1,83 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { countUp, countDown, countClear, inputNumber } from '../redux/modules/pageData';
+import PropTypes from 'prop-types';
+import NumberButtons from './number-button';
 
-import NumberButtons from './number-button'; 
+import {
+  countUp, countDown, countClear, inputNumber,
+} from '../redux/modules/pageData';
 
-
-
-class App extends React.Component{
+class App extends React.Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
-      inputCount: ''
-    }
+      inputCount: '',
+    };
 
     this.handleChange = (e) => {
       this.setState({
         inputCount: e.target.value,
-      })
-    }
+      });
+    };
 
     this.createButtons = () => {
-      let buttons = []; 
-      for (let i = 1; i < 10; i++) {
-        buttons.push(<NumberButtons key={i} index={i}/>)
+      const buttons = [];
+      for (let i = 1; i < 18; i++) {
+        buttons.push(<NumberButtons key={i} index={i} />);
       }
-      return buttons
-    }
+      return buttons;
+    };
   }
 
   render() {
-    const { count, countUp, countDown, countClear, inputNumber } = this.props;
-    const number = this.state.inputCount; 
+    const {
+      count, countUp, countDown, countClear, inputNumber,
+    } = this.props;
+    const number = this.state.inputCount;
     return (
       <div className="App">
-        <div style={{display: 'flex'}}>{this.createButtons()}</div>
-        <h1>{count}</h1> 
+        <div style={{ display: 'flex' }}>
+          {this.createButtons()}
+        </div>
+        <h1>
+          {count}
+        </h1>
         <div>
-          <input 
+          <input
             type="number"
             onChange={this.handleChange}
-            value={this.state.inputNumber} />
-          <button 
+            value={this.state.inputNumber}
+          />
+          <button
             className="button"
-            onClick={countUp}>+</button> 
-          <button 
+            onClick={countUp}
+          >
++
+          </button>
+          <button
             className="button"
-            onClick={countDown}>-</button> 
-          <button 
+            onClick={countDown}
+          >
+-
+          </button>
+          <button
             className="button"
-            onClick={countClear}>C</button>
-          <button 
+            onClick={countClear}
+          >
+C
+          </button>
+          <button
             className="button"
-            onClick={() => inputNumber(Number(number))}>Submit</button> 
+            onClick={() => inputNumber(Number(number))}
+          >
+Submit
+          </button>
           <div className="numbers">
-          {[...Array(101)].map((x, i) => <NumberButtons key={i} index={i}/>)}
+            {[...Array(101)].map((x, i) => <NumberButtons key={i} index={i} />)}
           </div>
-          
         </div>
-        <style jsx="true">{`
+        <style jsx="true">
+          {`
           .App {
             margin: 4rem;
             text-align: center;
@@ -73,26 +93,33 @@ class App extends React.Component{
             display: flex;
             flex-wrap: wrap;
           }
-        `}</style>
+        `}
+        </style>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {  
-  const { count } = state.pageData
-  return {
-    count
-  }
-}
+App.PropTypes = {
+  inputNumber: PropTypes.func.isRequired,
+  countClear: PropTypes.func.isRequired,
+  countDown: PropTypes.func.isRequired,
+  countUp: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
+};
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = (state) => {
+  const { count } = state.pageData;
   return {
-    countUp: () => dispatch(countUp()),
-    countDown: () => dispatch(countDown()),
-    countClear: () => dispatch(countClear()),
-    inputNumber: (number) => dispatch(inputNumber(number))
-  }
-}
+    count,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  countUp: () => dispatch(countUp()),
+  countDown: () => dispatch(countDown()),
+  countClear: () => dispatch(countClear()),
+  inputNumber: number => dispatch(inputNumber(number)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -16,47 +16,47 @@ export const NUMBER_BUTTONS = 'NUMBER_BUTTONS';
 export const numberButton = createAction(NUMBER_BUTTONS);
 
 const INITIAL_STATE = {
-  count: 0
+  count: 0,
 };
 
 console.log(countUp());
 
 const pageDataReducer = (state = INITIAL_STATE, action) => {
   console.log(action);
-  
-  switch(action.type) {
+
+  switch (action.type) {
     case COUNT_UP: {
       const { count } = state;
       return {
-        count: count + 1
-      }
+        count: count + 1,
+      };
     }
 
     case COUNT_DOWN: {
       const { count } = state;
       return {
-        count: count - 1
-      }
+        count: count - 1,
+      };
     }
 
     case COUNT_CLEAR: {
       return {
-        count: 0
-      }
+        count: 0,
+      };
     }
 
     case INPUT_NUMBER: {
-      console.log(typeof(action.payload));
-      
+      console.log(typeof (action.payload));
+
       return {
-        count: action.payload
-      }
+        count: action.payload,
+      };
     }
 
     case NUMBER_BUTTONS: {
       return {
-        count: action.payload
-      }
+        count: action.payload,
+      };
     }
 
     default: {
